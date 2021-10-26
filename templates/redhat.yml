@@ -1,0 +1,14 @@
+  GNU nano 5.4                              templates/redhat.yml                                        
+    - name: chek/install ntp client package
+      yum:
+        name=ntp
+        state=present
+
+    - name: deploy ntp.conf to hosts
+      template:
+        src=templates/ntp.conf.j2
+        dest=/etc/ntp.conf
+        owner=root
+        group=root
+        mode=0644
+        backup=yes

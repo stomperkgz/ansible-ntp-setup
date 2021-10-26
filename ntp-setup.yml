@@ -11,18 +11,14 @@
 
   tasks:
     - name: Distribution
-      debug: msg="{{ ansible_distribution }}"
+      debug: msg="{{ ansible_os_family }}"
 
-    - name: chek/install ntp client package
-      yum:
-        name=ntp
-        state=present
+    - name: deploy ntp.conf to Debian hosts
+      include_tasks: templates/debian.yml
+      when: ansible_os_family == 'Debian'
+      tags: package
 
-    - name: deploy ntp.conf to hosts
-      template:
-        src=template/ntp.conf.j2
-        dest=/etc/ntp.conf
-        owner=root
-        group=root
-        mode=0644
-        backup=yes
+    - name: deploy ntp.conf to Redhat hosts
+      include_tasks: templates/redhat.yml
+      when: ansible_os_family == 'RedHat'
+      tags: package
