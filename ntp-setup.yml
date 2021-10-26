@@ -7,7 +7,7 @@
     ntp_server1: ntp1.stratum1.ru
     ntp_server2: ntp2.stratum1.ru
     ntp_server3: ntp3.stratum1.ru
-    ntp_server4: ntp4.stratum1.rг
+    ntp_server4: ntp4.stratum1.ru
 
   tasks:
     - name: Distribution
