@@ -1,0 +1,28 @@
+- hosts: all
+  become: yes
+  gather_facts: true
+  become_user: root
+
+  vars:
+    ntp_server1: ntp1.stratum1.ru
+    ntp_server2: ntp2.stratum1.ru
+    ntp_server3: ntp3.stratum1.ru
+    ntp_server4: ntp4.stratum1.rг
+
+  tasks:
+    - name: Distribution
+      debug: msg="{{ ansible_distribution }}"
+
+    - name: chek/install ntp client package
+      yum:
+        name=ntp
+        state=present
+
+    - name: deploy ntp.conf to hosts
+      template:
+        src=template/ntp.conf.j2
+        dest=/etc/ntp.conf
+        owner=root
+        group=root
+        mode=0644
+        backup=yes
